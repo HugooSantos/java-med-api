@@ -1,7 +1,7 @@
 package fat.pe.api.doctors;
 
 
-import fat.pe.api.adress.Adress;
+import fat.pe.api.address.Address;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -25,5 +25,13 @@ public class Doctor {
     @Enumerated(EnumType.STRING)
     private Speciality speciality;
     @Embedded
-    private Adress adress;
+    private Address address;
+
+    public Doctor(DataDoctors dataDoctors) {
+        this.name = dataDoctors.name();
+        this.email = dataDoctors.email();
+        this.crm = dataDoctors.crm();
+        this.speciality = dataDoctors.speciality();
+        this.address = new Address(dataDoctors.addressData());
+    }
 }
