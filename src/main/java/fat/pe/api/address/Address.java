@@ -28,4 +28,14 @@ public class Address {
         this.complement = addressData.complement();
         this.number = addressData.number();
     }
+
+    public void updateInfo(AddressData addressData) {
+        this.street = addressData.street();
+        this.neighborhood = addressData.neighborhood();
+        this.cep = addressData.cep();
+        this.city = addressData.city();
+        this.state = addressData.state();
+        this.complement = addressData.complement();
+        this.number = addressData.number();
+    }
 }

@@ -22,16 +22,23 @@ public class Doctor {
     private String name;
     private String email;
     private String crm;
+    private String phone;
     @Enumerated(EnumType.STRING)
     private Speciality speciality;
     @Embedded
     private Address address;
 
-    public Doctor(DataDoctors dataDoctors) {
+    public Doctor(DataStoreDoctors dataDoctors) {
         this.name = dataDoctors.name();
         this.email = dataDoctors.email();
         this.crm = dataDoctors.crm();
+        this.phone = dataDoctors.phone();
         this.speciality = dataDoctors.speciality();
         this.address = new Address(dataDoctors.addressData());
+    }
+
+    public void updateInfo(DataUpdateDoctors dataDoctors) {
+        this.name = dataDoctors.name();
+        this.address.updateInfo(dataDoctors.addressData());
     }
 }
