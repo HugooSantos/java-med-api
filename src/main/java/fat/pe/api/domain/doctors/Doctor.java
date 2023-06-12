@@ -1,7 +1,7 @@
-package fat.pe.api.doctors;
+package fat.pe.api.domain.doctors;
 
 
-import fat.pe.api.address.Address;
+import fat.pe.api.domain.address.Address;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -18,8 +18,8 @@ import lombok.NoArgsConstructor;
 public class Doctor {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Boolean active;
     private Long id;
+    private Boolean active;
     private String name;
     private String email;
     private String crm;

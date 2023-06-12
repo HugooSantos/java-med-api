@@ -1,4 +1,4 @@
-package fat.pe.api.doctors;
+package fat.pe.api.domain.doctors;
 
 public enum Speciality {
     ORTOPEDIA,

@@ -1,6 +1,6 @@
-package fat.pe.api.doctors;
+package fat.pe.api.domain.doctors;
 
-import fat.pe.api.address.AddressData;
+import fat.pe.api.domain.address.AddressData;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

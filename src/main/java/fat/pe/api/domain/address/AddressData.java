@@ -1,4 +1,4 @@
-package fat.pe.api.address;
+package fat.pe.api.domain.address;
 
 import jakarta.validation.constraints.NotBlank;
 
