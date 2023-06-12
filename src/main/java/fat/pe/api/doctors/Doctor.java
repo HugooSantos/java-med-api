@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 public class Doctor {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Boolean active;
     private Long id;
     private String name;
     private String email;
@@ -29,6 +30,7 @@ public class Doctor {
     private Address address;
 
     public Doctor(DataStoreDoctors dataDoctors) {
+        this.active = true;
         this.name = dataDoctors.name();
         this.email = dataDoctors.email();
         this.crm = dataDoctors.crm();
@@ -40,5 +42,9 @@ public class Doctor {
     public void updateInfo(DataUpdateDoctors dataDoctors) {
         this.name = dataDoctors.name();
         this.address.updateInfo(dataDoctors.addressData());
+    }
+
+    public void delete() {
+        this.active = false;
     }
 }

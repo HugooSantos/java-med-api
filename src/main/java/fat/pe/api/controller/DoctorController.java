@@ -18,14 +18,23 @@ public class DoctorController {
     public void store(@RequestBody @Valid DataStoreDoctors dataDoctors){
         repository.save(new Doctor(dataDoctors));
     }
+
     @GetMapping
     public List<DataShowDoctor> show(){
         return repository.findAll().stream().map(DataShowDoctor::new).toList();
     }
+
     @PutMapping
     @Transactional
-    public void update(@RequestBody @Valid DataUpdateDoctors dataDoctors ){
+    public void update(@RequestBody @Valid DataUpdateDoctors dataDoctors){
         var doctor = repository.getReferenceById(dataDoctors.id());
         doctor.updateInfo(dataDoctors);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void destroy(@PathVariable Long id){
+        var doctor = repository.getReferenceById(id);
+        doctor.delete();
     }
 }
