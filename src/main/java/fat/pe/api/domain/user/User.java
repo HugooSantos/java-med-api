@@ -1,5 +1,6 @@
 package fat.pe.api.domain.user;
 
+import fat.pe.api.infra.SecurityConfig;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -12,20 +13,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@Table(name = "usuarios")
-@Entity(name = "Usuario")
+@Table(name = "user")
+@Entity(name = "user")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String login;
-    private String senha;
-
+    private String password;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
@@ -33,7 +32,7 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return senha;
+        return  password;
     }
 
     @Override
@@ -59,5 +58,11 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void saveNewUser(DataUser dataUser) {
+        var passwordEncoder = new SecurityConfig().passwordEncoder();
+        this.login = dataUser.login();
+        this.password =  passwordEncoder.encode(dataUser.password());
     }
 }
