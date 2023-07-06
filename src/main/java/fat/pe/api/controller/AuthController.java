@@ -1,6 +1,7 @@
 package fat.pe.api.controller;
 
 import fat.pe.api.domain.user.User;
+import fat.pe.api.infra.DataTokenJwt;
 import fat.pe.api.infra.TokenService;
 import fat.pe.api.user.DataAutentication;
 import jakarta.validation.Valid;
@@ -25,7 +26,8 @@ public class AuthController {
     public ResponseEntity login(@RequestBody @Valid DataAutentication dataAutentication){
         var token = new UsernamePasswordAuthenticationToken(dataAutentication.login(),dataAutentication.password());
         var authentication = manager.authenticate(token);
-        return ResponseEntity.ok(tokenService.generateToken((User) authentication.getPrincipal()));
+        var authToken =  tokenService.generateToken((User) authentication.getPrincipal());
+        return ResponseEntity.ok(new DataTokenJwt(authToken));
     }
 
 }
